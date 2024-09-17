@@ -5,10 +5,12 @@
   let sprite
   let ctx
   let bet = 100
-  let credit = 1000
+  let credit = 900
   let holds = [false, false, false, false, false]
-  const scores = [500, 100, 50, 10, 7, 5, 3, 2, 1]
 
+  let gameState = "bet" //bet, hold, done, busy
+
+  const scores = [500, 100, 50, 10, 7, 5, 3, 2, 1]
   const cardWidth = 102
   const cardHeight = 115
   const cardSpaceX = 11
@@ -79,6 +81,28 @@
     }
   }
 
+  function resetBet() {
+    if (gameState === "bet") {
+      credit += bet - 100
+      bet = 100
+    }
+  }
+
+  function bet100() {
+    if (gameState === "bet" && credit >= 100) {
+      bet += 100
+      credit -= 100
+    }
+  }
+
+  function deal() {
+
+  }
+
+  function takeScore() {
+
+  }
+
 </script>
 <main>
   <div style="display: flex; flex-direction: row;">
@@ -102,7 +126,7 @@
   <canvas id="canvas" width="575" height="137" />
   <div style="width: 1150px; padding-left: 2px; display: flex; flex-direction: row;">
   {#each holds as hold, index}
-    <div style="width: 227px; text-align: center;">
+    <div style="width: 182px; text-align: center;">
       <p style="opacity:{(holds[index] === true) ? 1.0 : 0.0}" class="holdP">HOLD</p>
       <button on:click={e => {holdClick(index)}} class="holdBtn">Hold</button>
     </div>
@@ -112,16 +136,16 @@
   <br><br>
   <div style="width: 1150px; padding-left: 2px; display: flex; flex-direction: row;">
     <div style="width: 227px; text-align: center;">
-      <button class="gameBtn">Cancel</button>
+      <button on:click={resetBet} class="gameBtn">Reset Bet</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button class="gameBtn">Start</button>
+      <button on:click={bet100} class="gameBtn">Bet 100</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button class="gameBtn">Bet</button>
+      <button on:click={deal} class="gameBtn">Deal</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button class="gameBtn">Take Score</button>
+      <button on:click={takeScore} class="gameBtn">Take Score</button>
     </div>
   </div>
   </main>
@@ -139,7 +163,7 @@
     text-align: right;
   }
   canvas {
-    zoom: 2;
+    zoom: 1.6;
     background-color: #006600;
   }
 
