@@ -127,7 +127,7 @@
   <div style="width: 1150px; padding-left: 2px; display: flex; flex-direction: row;">
   {#each holds as hold, index}
     <div style="width: 182px; text-align: center;">
-      <p style="opacity:{(holds[index] === true) ? 1.0 : 0.0}" class="holdP">HOLD</p>
+      <p style="opacity:{hold === true ? 1.0 : 0.0}" class="holdP">HOLD</p>
       <button on:click={e => {holdClick(index)}} class="holdBtn">Hold</button>
     </div>
     <br>
