@@ -9,6 +9,7 @@
   let holds = [false, false, false, false, false]
 
   let gameState = "bet" //bet, hold, done, busy
+  
 
   const scores = [500, 100, 50, 10, 7, 5, 3, 2, 1]
   const cardWidth = 102
