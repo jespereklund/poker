@@ -9,7 +9,6 @@
   let holds = [false, false, false, false, false]
   const scores = [500, 100, 50, 10, 7, 5, 3, 2, 1]
 
-  
   const cardWidth = 102
   const cardHeight = 115
   const cardSpaceX = 11
