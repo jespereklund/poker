@@ -4,8 +4,8 @@
   let table = [null, null, null, null, null]
   let sprite
   let ctx
-  let bet = 100
-  let credit = 900
+  let bet = 1
+  let credit = 99
   let holds = [false, false, false, false, false]
   let gameState = "bet" //bet, hold, done, busy
   let canvas
@@ -83,15 +83,15 @@
 
   function resetBet() {
     if (gameState === "bet") {
-      credit += bet - 100
-      bet = 100
+      credit += bet - 1
+      bet = 1
     }
   }
 
-  function bet100() {
-    if (gameState === "bet" && credit >= 100) {
-      bet += 100
-      credit -= 100
+  function bet1() {
+    if (gameState === "bet" && credit >= 1) {
+      bet += 1
+      credit -= 1
     }
   }
 
@@ -128,7 +128,7 @@
   {#each holds as hold, index}
     <div style="width: 182px; text-align: center;">
       <p style="opacity:{hold === true ? 1.0 : 0.0}" class="holdP">HOLD</p>
-      <button on:click={e => {holdClick(index)}} class="holdBtn">Hold</button>
+      <button on:click={e => {holdClick(index)}} class="btn yellowBorder">Hold</button>
     </div>
     <br>
   {/each}
@@ -136,16 +136,16 @@
   <br><br>
   <div style="width: 1150px; padding-left: 2px; display: flex; flex-direction: row;">
     <div style="width: 227px; text-align: center;">
-      <button on:click={resetBet} class="gameBtn">Reset Bet</button>
+      <button on:click={resetBet} class="btn redBorder">Reset Bet</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button on:click={bet100} class="gameBtn">Bet 100</button>
+      <button on:click={bet1} class="btn redBorder">Bet 1</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button on:click={deal} class="gameBtn">Deal</button>
+      <button on:click={deal} class="btn redBorder">Deal</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button on:click={takeScore} class="gameBtn">Take Score</button>
+      <button on:click={takeScore} class="btn redBorder">Take Score</button>
     </div>
   </div>
   </main>
@@ -167,12 +167,11 @@
     background-color: #006600;
   }
 
-  .holdBtn {
+  .btn {
     background-color: #339900;
-    color: white;
+    color: yellow;
     font-size: 20px;
     border-width: 4px;
-    border-color: yellow;
     text-align: center;    
     width: 150px;
     height: 50px;
@@ -180,17 +179,12 @@
     margin-right: 0px;
   }
 
-  .gameBtn {
-    background-color: #339900;
-    color: white;
-    font-size: 20px;
-    border-width: 4px;
+  .yellowBorder {
+    border-color: yellow;
+  }
+
+  .redBorder {
     border-color: red;
-    text-align: center;    
-    width: 150px;
-    height: 50px;
-    margin-left: 0px;
-    margin-right: 0px;
   }
 
   .holdP {
