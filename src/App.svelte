@@ -29,11 +29,21 @@
     }
     shuffle()
 
+    /*
     table[0] = deck.pop()
     table[1] = deck.pop()
     table[2] = deck.pop()
     table[3] = deck.pop()
     table[4] = deck.pop()
+    */
+
+    table[0] = 2
+    table[1] = 2 + 13 
+    table[2] = 2 + 13 + 13
+    table[3] = 2
+    table[4] = 7 + 13 
+
+    calcScore()
 
     drawTable()
   }
@@ -101,6 +111,65 @@
 
   function takeScore() {
 
+  }
+
+  function calcScore() {
+    let values = new Array(13).fill(0)
+
+    table.forEach(card => {
+      values[card % 13] += 1
+    })
+
+    console.log("values", values)
+
+    let score = 0
+
+    //Jacks or better
+    const betterIndexes = [0, 9, 10, 11, 12]
+    values.forEach((value, index) => {
+      if ( betterIndexes.includes(index) && value > 0 ) {
+        score = scores[8]
+      }
+    })
+
+    //2 pairs
+    let pairs = 0
+    values.forEach(value => {
+      if (value === 2) {
+        pairs += 1
+      }
+    })
+    if (pairs === 2) {
+      score = scores[7]
+    }
+
+    //3 and 4 of a kind
+    values.forEach(value => {
+      if (value === 3) {
+        //3 
+        score = scores[6]
+      } else if (value === 4) {
+        //4 
+        score = scores[2]
+      }
+    })
+
+    //full house
+    let fullHouse = 0
+    values.forEach(value => {
+      if (value === 2) {
+        fullHouse += 1
+      }
+
+      if (value === 3) {
+        fullHouse += 1
+      }
+    })
+    if (fullHouse === 2) {
+      score = scores[3]
+    }
+    
+    console.log("score", score)
   }
 
 </script>
