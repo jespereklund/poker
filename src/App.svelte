@@ -37,11 +37,11 @@
     table[4] = deck.pop()
     */
 
-    table[0] = 2
-    table[1] = 2 + 13 
-    table[2] = 2 + 13 + 13
-    table[3] = 2
-    table[4] = 7 + 13 
+    table[0] = 0 + 13
+    table[1] = 9 + 13 
+    table[2] = 10 + 13
+    table[3] = 11 + 13
+    table[4] = 12 + 13 
 
     calcScore()
 
@@ -168,7 +168,60 @@
     if (fullHouse === 2) {
       score = scores[3]
     }
-    
+
+    //flush (cards in same suit)
+    const suit = Math.floor(table[0] / 13)
+    let sameSuit = true
+    table.forEach(card => {
+      if (Math.floor(card / 13) != suit) {
+        sameSuit = false
+      }
+    });
+    if (sameSuit === true) {
+      score = scores[4]
+    }
+
+    //straight (cards in order, suit irrelevant)
+    let straights = 0
+    values.forEach(value => {
+      if (value === 1) {
+        straights += 1
+        if (straights === 5 || (values[0] === 1 && values[9] === 1 && values[10] === 1 && values[11] === 1 && values[12] === 1 )) {
+          score = scores[5]
+
+          //straight flush (straight in same suit)
+          const suit = Math.floor(table[0] / 13)
+          let sameSuit = true
+          table.forEach(card => {
+            if (Math.floor(card / 13) != suit) {
+              sameSuit = false
+            }
+          })
+          if (sameSuit === true) {
+            score = scores[1]
+          }
+        }
+      } else {
+        straights = 0
+      }
+    })
+
+    //royal flush
+    if (values[0] === 1 && values[9] === 1 && values[10] === 1 && values[11] === 1 && values[12] === 1 ) {
+      const suit = Math.floor(table[0] / 13)
+      let sameSuit = true
+      table.forEach(card => {
+        if (Math.floor(card / 13) != suit) {
+          sameSuit = false
+        }
+      });
+      if (sameSuit === true) {
+        console.log("royal")
+        score = scores[0]
+      } 
+    }
+
+
     console.log("score", score)
   }
 
