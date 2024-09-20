@@ -33,19 +33,21 @@
     }
     shuffle()
 
-    /*
+    
     table[0] = deck.pop()
     table[1] = deck.pop()
     table[2] = deck.pop()
     table[3] = deck.pop()
     table[4] = deck.pop()
-    */
+    
 
+    /*
     table[0] = 0 + 13
     table[1] = 9 + 13 
     table[2] = 10 + 13
     table[3] = 11 + 13
     table[4] = 12 + 13 
+    */
 
     calcScore()
 
@@ -159,8 +161,10 @@
 
     //full house
     let fullHouse = 0
+    let done2 = false
     values.forEach(value => {
-      if (value === 2) {
+      if (value === 2 && done2 === false) {
+        done2 = true
         fullHouse += 1
       }
 
