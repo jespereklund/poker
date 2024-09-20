@@ -256,10 +256,10 @@
   <br><br>
   <div style="width: 1150px; padding-left: 2px; display: flex; flex-direction: row;">
     <div style="width: 227px; text-align: center;">
-      <button on:click={resetBet} class="btn redBorder">Reset Bet</button>
+      <button on:click={resetBet} disabled={gameState != "bet"} class="btn redBorder">Reset Bet</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button on:click={bet1} class="btn redBorder">Bet 1</button>
+      <button on:click={bet1} disabled={gameState != "bet"} class="btn redBorder">Bet 1</button>
     </div>
     <div style="width: 227px; text-align: center;">
       <button on:click={deal} class="btn redBorder">Deal</button>
@@ -297,6 +297,12 @@
     margin-left: 0px;
     margin-right: 0px;
   }
+
+  .btn:disabled, .btn[disabled]{
+  border: 2px solid #006600;
+  background-color: #003300;
+  color: #666600;
+}
 
   .yellowBorder {
     border-color: yellow;
