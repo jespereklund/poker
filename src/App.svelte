@@ -41,7 +41,7 @@
     table[4] = deck.pop()
     */
 
-    table[0] = 8 + 13
+    table[0] = 0 + 13
     table[1] = 9 + 13 
     table[2] = 10 + 13
     table[3] = 11 + 13
@@ -203,10 +203,8 @@
     })
 
     //royal flush (straight: 0, 9, 10, 11, 12 in same suit)
-    if (values[0] === 1 && values[9] === 1 && values[10] === 1 && values[11] === 1 && values[12] === 1 ) {
-      if (isSameSuit()) {
-        scoreIndex = 0
-      }
+    if (values[0] === 1 && values[9] === 1 && values[10] === 1 && values[11] === 1 && values[12] === 1 && isSameSuit() ) {
+      scoreIndex = 0
     }
     score = scores[scoreIndex]
     console.log("score", score, scoreIndex)
