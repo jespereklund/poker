@@ -7,9 +7,7 @@ export function calcScore(table) {
         values[card % 13] += 1
     })
 
-    //console.log("values", values)
-
-    //Jacks or better
+    //-------------------------Jacks or better----------------------------
     const betterIndexes = [0, 10, 11, 12]
     values.forEach((value, index) => {
         if (betterIndexes.includes(index) && value > 0) {
@@ -17,7 +15,7 @@ export function calcScore(table) {
         }
     })
 
-    //2 pairs
+    //------------------------------2 pairs--------------------------------
     let pairs = 0
     values.forEach(value => {
         if (value === 2) {
@@ -28,7 +26,7 @@ export function calcScore(table) {
         scoreIndex = 7
     }
 
-    //3 and 4 of a kind
+    //---------------------------3 and 4 of a kind-------------------------
     values.forEach(value => {
         if (value === 3) {
             scoreIndex = 6
@@ -37,7 +35,7 @@ export function calcScore(table) {
         }
     })
 
-    //full house
+    //-----------------------------full house------------------------------
     let fullHouse = 0
     let done2 = false
     values.forEach(value => {
@@ -54,7 +52,7 @@ export function calcScore(table) {
         scoreIndex = 3
     }
 
-    //flush (cards in same suit)
+    //---------------------flush (cards in same suit)----------------------
     const suit = Math.floor(table[0] / 13)
     let sameSuit = true
     table.forEach(card => {
@@ -66,7 +64,7 @@ export function calcScore(table) {
         scoreIndex = 4
     }
 
-    //straight (cards in order, suit irrelevant)
+    //------------straight (cards in order, suit irrelevant)--------------
     let straights = 0
     values.forEach(value => {
         if (value === 1) {
@@ -74,7 +72,7 @@ export function calcScore(table) {
             if (straights === 5 || (values[0] === 1 && values[9] === 1 && values[10] === 1 && values[11] === 1 && values[12] === 1)) {
                 scoreIndex = 5
 
-                //straight flush (straight in same suit)
+    //-------------straight flush (straight in same suit)-----------------
                 if (isSameSuit(table)) {
                     scoreIndex = 1
                 }
@@ -84,11 +82,10 @@ export function calcScore(table) {
         }
     })
 
-    //royal flush (straight: 0, 9, 10, 11, 12 in same suit)
+    //-------royal flush (straight: 0, 9, 10, 11, 12 in same suit)----------
     if (values[0] === 1 && values[9] === 1 && values[10] === 1 && values[11] === 1 && values[12] === 1 && isSameSuit(table)) {
         scoreIndex = 0
     }
-    //console.log("scoreIndex", scoreIndex)
     return scoreIndex
 }
 
