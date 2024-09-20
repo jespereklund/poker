@@ -120,9 +120,9 @@
   function calcScore() {
     scoreIndex = -1
     let score = 0
-
     let values = new Array(13).fill(0)
 
+    //count the values of the table
     table.forEach(card => {
       values[card % 13] += 1
     })
