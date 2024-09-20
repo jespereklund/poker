@@ -9,8 +9,11 @@
   let holds = [false, false, false, false, false]
   let gameState = "bet" //bet, hold, done, busy
   let canvas
+  let blink = false
+  let scoreIndex = -1
   
   const scores = [500, 100, 50, 10, 7, 5, 3, 2, 1]
+  const scoreTexts = ["Royal Flush", "Straight Flush", "4 of a kind", "Full House", "Flush", "Straight", "3 of a kind", "2 pairs", "Jacks or Better"]
   const cardWidth = 102
   const cardHeight = 115
   const cardSpaceX = 11
@@ -20,6 +23,7 @@
     canvas = document.getElementById("canvas")
     ctx = canvas.getContext('2d')
     loadSprites()
+    window.setInterval(toggleBlink, 400);
   })
 
   function newGame() {
@@ -114,6 +118,7 @@
   }
 
   function calcScore() {
+    scoreIndex = -1
     let values = new Array(13).fill(0)
 
     table.forEach(card => {
@@ -128,7 +133,7 @@
     const betterIndexes = [0, 9, 10, 11, 12]
     values.forEach((value, index) => {
       if ( betterIndexes.includes(index) && value > 0 ) {
-        score = scores[8]
+        scoreIndex = 8
       }
     })
 
@@ -140,17 +145,15 @@
       }
     })
     if (pairs === 2) {
-      score = scores[7]
+      scoreIndex = 7
     }
 
     //3 and 4 of a kind
     values.forEach(value => {
       if (value === 3) {
-        //3 
-        score = scores[6]
+        scoreIndex = 6
       } else if (value === 4) {
-        //4 
-        score = scores[2]
+        scoreIndex = 2
       }
     })
 
@@ -166,7 +169,7 @@
       }
     })
     if (fullHouse === 2) {
-      score = scores[3]
+      scoreIndex = 3
     }
 
     //flush (cards in same suit)
@@ -178,7 +181,7 @@
       }
     });
     if (sameSuit === true) {
-      score = scores[4]
+      scoreIndex = 4
     }
 
     //straight (cards in order, suit irrelevant)
@@ -187,7 +190,7 @@
       if (value === 1) {
         straights += 1
         if (straights === 5 || (values[0] === 1 && values[9] === 1 && values[10] === 1 && values[11] === 1 && values[12] === 1 )) {
-          score = scores[5]
+          scoreIndex = 5
 
           //straight flush (straight in same suit)
           const suit = Math.floor(table[0] / 13)
@@ -198,7 +201,7 @@
             }
           })
           if (sameSuit === true) {
-            score = scores[1]
+            scoreIndex = 1
           }
         }
       } else {
@@ -206,7 +209,7 @@
       }
     })
 
-    //royal flush
+    //royal flush (straight: 0, 9, 10, 11, 12 in same suit)
     if (values[0] === 1 && values[9] === 1 && values[10] === 1 && values[11] === 1 && values[12] === 1 ) {
       const suit = Math.floor(table[0] / 13)
       let sameSuit = true
@@ -216,13 +219,15 @@
         }
       });
       if (sameSuit === true) {
-        console.log("royal")
-        score = scores[0]
+        scoreIndex = 0
       } 
     }
+    score = scores[scoreIndex]
+    console.log("score", score, scoreIndex)
+  }
 
-
-    console.log("score", score)
+  function toggleBlink() {
+    blink = !blink
   }
 
 </script>
@@ -233,15 +238,9 @@
       <p class="txt">Bet {bet}</p>
     </div>
     <table class="txt">
-      <tr><td>Royal Flush</td><td class="right">{bet * scores[0]}</td></tr>
-      <tr><td>Straight Flush</td><td class="right">{bet * scores[1]}</td></tr>
-      <tr><td>4 of a kind</td><td class="right">{bet * scores[2]}</td></tr>
-      <tr><td>Full House</td><td class="right">{bet * scores[3]}</td></tr>
-      <tr><td>Flush</td><td class="right">{bet * scores[4]}</td></tr>
-      <tr><td>Straight</td><td class="right">{bet * scores[5]}</td></tr>
-      <tr><td>3 of a kind</td><td class="right">{bet * scores[6]}</td></tr>
-      <tr><td>2 pairs</td><td class="right">{bet * scores[7]}</td></tr>
-      <tr><td>Jacks or Better</td><td class="right">{bet * scores[8]}</td></tr>
+      {#each scoreTexts as text, index}
+        <tr style="opacity:{(scoreIndex === index && blink) ? 0.0 : 1.0}"><td>{text}</td><td class="right">{bet * scores[index]}</td></tr>  
+      {/each}
     </table>
   </div>
   <br><br>
@@ -286,7 +285,6 @@
   }
   canvas {
     zoom: 1.6;
-    background-color: #006600;
   }
 
   .btn {
