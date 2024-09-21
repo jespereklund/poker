@@ -31,7 +31,7 @@
   })
 
   function newGame() {
-    table[0] = deck.popCard()
+    table[0] = deck.popCard() 
     table[1] = deck.popCard()
     table[2] = deck.popCard()
     table[3] = deck.popCard()
@@ -75,6 +75,7 @@
     table[1] = deck.popCard()
     table[2] = deck.popCard()
     table[3] = deck.popCard()
+    table[4] = deck.popCard()
     table[4] = deck.popCard()
     table[4] = deck.popCard()
     table[4] = deck.popCard()
@@ -83,8 +84,7 @@
     table[4] = deck.popCard(true)
     table[4] = deck.popCard(true)
     table[4] = deck.popCard(true)
-    table[4] = deck.popCard()
-
+    
     scoreIndex = calcScore(table)
     drawTable()
   }
