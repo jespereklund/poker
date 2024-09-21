@@ -1,7 +1,9 @@
 <script>
   import { onMount } from "svelte";
   import { calcScore } from "./helpers";
-  let deck = []
+  import Deck from "./deck";
+
+  let deck
   let table = [null, null, null, null, null]
   let sprite
   let ctx
@@ -21,6 +23,7 @@
   const cardSpaceY = 9
 
   onMount(() => {
+    deck = new Deck()
     canvas = document.getElementById("canvas")
     ctx = canvas.getContext('2d')
     loadSprites()
@@ -28,40 +31,14 @@
   })
 
   function newGame() {
-    deck = []
-    for (let i=0; i<52; i++) {
-      deck.push(i)
-    }
-    shuffleDeck()
-    
-    table[0] = deck.pop()
-    table[1] = deck.pop()
-    table[2] = deck.pop()
-    table[3] = deck.pop()
-    table[4] = deck.pop()
-    
-
-    /*
-    table[0] = 0 + 13
-    table[1] = 9 + 13 
-    table[2] = 10 + 13
-    table[3] = 11 + 13
-    table[4] = 12 + 13 
-    */
+    table[0] = deck.popCard()
+    table[1] = deck.popCard()
+    table[2] = deck.popCard()
+    table[3] = deck.popCard()
+    table[4] = deck.popCard()
 
     scoreIndex = calcScore(table)
-
     drawTable()
-  }
-
-  function shuffleDeck() {
-    let currentIndex = deck.length;
-    while (currentIndex != 0) {
-      let randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [deck[currentIndex], deck[randomIndex]] = [
-        deck[randomIndex], deck[currentIndex]];
-    }
   }
 
   function loadSprites() {
