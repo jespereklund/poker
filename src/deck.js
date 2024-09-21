@@ -6,8 +6,8 @@ export default class Deck {
     }
 
     popCard(afterHold = false) {
-        console.log("deck length=", this.deck.length)
-        if (this.deck.length < 8 && afterHold === false ) {
+        console.log("popCard deck length=", this.deck.length)
+        if (this.deck.length < 4 && afterHold === false ) {
             this.deck = []
             this.newDeck()
         }
