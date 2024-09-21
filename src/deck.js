@@ -6,6 +6,11 @@ export default class Deck {
     }
 
     popCard() {
+        console.log("deck length=", this.deck.length)
+        if (this.deck.length < 8) {
+            this.deck = []
+            this.newDeck()
+        }
         const card = this.deck.pop()
         return card
     }
@@ -15,6 +20,7 @@ export default class Deck {
             this.deck.push(i)
         }
         this.shuffleDeck()      
+        console.log("new deck", this.deck.length)
     }
 
     shuffleDeck() {
