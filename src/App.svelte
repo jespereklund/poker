@@ -10,7 +10,7 @@
   let bet = 1
   let credit = 99
   let holds = [false, false, false, false, false]
-  let gameState = "bet" //bet, hold, done, busy
+  let gameState = "bet" //bet, hold, done, gameOver
   let canvas
   let blink = false
   let scoreIndex = -1
@@ -44,19 +44,6 @@
     }
   }
 
-  /*
-  function newGame() {
-    table[0] = deck.popCard() 
-    table[1] = deck.popCard()
-    table[2] = deck.popCard()
-    table[3] = deck.popCard()
-    table[4] = deck.popCard()
-
-    scoreIndex = calcScore(table)
-    drawTable()
-  }
-  */
-
   function loadSprites() {
     sprite = new Image()
     sprite.onload = function() {
@@ -85,7 +72,6 @@
           sum += 1
         }
       }
-      //console.log(sum)
       if (sum < 3 || holds[index] === true) {
         holds[index] = !holds[index]
       }
@@ -118,18 +104,29 @@
     }
 
     scoreIndex = calcScore(table)
+
+    //if (scoreIndex === )
     drawTable()
   }
 
-  function takeScore() {
+  function finishGame() {
     scoreIndex = calcScore(table)
-    credit += bet * scores[scoreIndex] - 1
-    bet = 1
-    gameState = "bet"
-    table = []
-    scoreIndex = -1
-    holds = [false, false, false, false, false]
-    drawTable()
+    console.log("scoreIndex", scoreIndex)
+    if(scoreIndex > 0) {
+      credit += bet * scores[scoreIndex] - 1
+    } else {
+      credit -= 1
+    }
+    if (credit < 1) {
+      gameState = "gameOver"
+    } else {
+      bet = 1
+      gameState = "bet"
+      table = []
+      scoreIndex = -1
+      holds = [false, false, false, false, false]
+      drawTable()
+    }
   }
 
   function toggleBlink() {
@@ -138,6 +135,7 @@
 
 </script>
 <main>
+  {#if gameState != "gameOver"}
   <div style="display: flex; flex-direction: row;">
     <div style="padding-left:50px; width: 350px; color: white;">
       <p class="txt">Credit {credit}</p>
@@ -172,9 +170,13 @@
       <button on:click={deal} disabled={gameState != "bet" && gameState != "hold"} class="btn redBorder">Deal</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button on:click={takeScore} disabled={gameState === "bet"} class="btn redBorder">Take Score</button>
+      <button on:click={finishGame} disabled={gameState === "bet"} class="btn redBorder">Finish Game</button>
     </div>
   </div>
+  <p class="txt">{gameState}</p>
+  {:else}
+    <p class="txt">Game Over! Press F5 for new game!</p>
+  {/if}
   </main>
 <style>
   table {
