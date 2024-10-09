@@ -105,7 +105,6 @@
 
     scoreIndex = calcScore(table)
 
-    //if (scoreIndex === )
     drawTable()
   }
 
