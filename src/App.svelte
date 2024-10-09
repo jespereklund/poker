@@ -36,10 +36,10 @@
     }
   }
 
-  function dealNotHold() {
+  function dealAfterHold() {
     for (let i=0; i<5; i++) {
       if (holds[i] != true) {
-        table[i] = deck.popCard() 
+        table[i] = deck.popCard(true) 
       }
     }
   }
@@ -94,7 +94,7 @@
 
   function deal() {
     if(gameState === "hold") {
-      dealNotHold()
+      dealAfterHold()
       gameState = "done"
     }
 
@@ -169,10 +169,9 @@
       <button on:click={deal} disabled={gameState != "bet" && gameState != "hold"} class="btn redBorder">Deal</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button on:click={finishGame} disabled={gameState === "bet"} class="btn redBorder">Finish Game</button>
+      <button on:click={finishGame} disabled={gameState === "bet"} class="btn redBorder">Finish Round</button>
     </div>
   </div>
-  <p class="txt">{gameState}</p>
   {:else}
     <p class="txt">Game Over! Press F5 for new game!</p>
   {/if}
