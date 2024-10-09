@@ -30,6 +30,21 @@
     window.setInterval(toggleBlink, 400);
   })
 
+  function dealAll() {
+    for (let i=0; i<5; i++) {
+      table[i] = deck.popCard() 
+    }
+  }
+
+  function dealNotHold() {
+    for (let i=0; i<5; i++) {
+      if (holds[i] != true) {
+        table[i] = deck.popCard() 
+      }
+    }
+  }
+
+  /*
   function newGame() {
     table[0] = deck.popCard() 
     table[1] = deck.popCard()
@@ -40,11 +55,12 @@
     scoreIndex = calcScore(table)
     drawTable()
   }
+  */
 
   function loadSprites() {
     sprite = new Image()
     sprite.onload = function() {
-      newGame()
+      
     }
     sprite.src = 'deck.png'
   }  
@@ -62,15 +78,17 @@
   }
 
   function holdClick(index) {
-    let sum = 0
-    for (let i=0; i<5; i++) {
-      if (holds[i] === true) {
-        sum += 1
+    if (gameState === "hold") {
+      let sum = 0
+      for (let i=0; i<5; i++) {
+        if (holds[i] === true) {
+          sum += 1
+        }
       }
-    }
-    console.log(sum)
-    if (sum < 3 || holds[index] === true) {
-      holds[index] = !holds[index]
+      //console.log(sum)
+      if (sum < 3 || holds[index] === true) {
+        holds[index] = !holds[index]
+      }
     }
   }
 
@@ -89,11 +107,29 @@
   }
 
   function deal() {
+    if(gameState === "hold") {
+      dealNotHold()
+      gameState = "done"
+    }
 
+    if (gameState === "bet") {
+      dealAll()
+      gameState = "hold"
+    }
+
+    scoreIndex = calcScore(table)
+    drawTable()
   }
 
   function takeScore() {
-
+    scoreIndex = calcScore(table)
+    credit += bet * scores[scoreIndex] - 1
+    bet = 1
+    gameState = "bet"
+    table = []
+    scoreIndex = -1
+    holds = [false, false, false, false, false]
+    drawTable()
   }
 
   function toggleBlink() {
@@ -119,7 +155,7 @@
   {#each holds as hold, index}
     <div style="width: 182px; text-align: center;">
       <p style="opacity:{hold === true ? 1.0 : 0.0}" class="holdP">HOLD</p>
-      <button on:click={e => {holdClick(index)}} class="btn yellowBorder">Hold</button>
+      <button on:click={e => {holdClick(index)}} disabled={gameState === "hold" ? false : true} class="btn yellowBorder">Hold</button>
     </div>
     <br>
   {/each}
@@ -133,10 +169,10 @@
       <button on:click={bet1} disabled={gameState != "bet"} class="btn redBorder">Bet 1</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button on:click={deal} class="btn redBorder">Deal</button>
+      <button on:click={deal} disabled={gameState != "bet" && gameState != "hold"} class="btn redBorder">Deal</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button on:click={takeScore} class="btn redBorder">Take Score</button>
+      <button on:click={takeScore} disabled={gameState === "bet"} class="btn redBorder">Take Score</button>
     </div>
   </div>
   </main>

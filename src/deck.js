@@ -6,7 +6,7 @@ export default class Deck {
     }
 
     popCard(afterHold = false) {
-        console.log("popCard deck length=", this.deck.length)
+        //console.log("popCard deck length=", this.deck.length)
         if (this.deck.length < 4 && afterHold === false ) {
             this.deck = []
             this.newDeck()
@@ -16,6 +16,7 @@ export default class Deck {
     }
 
     newDeck() {
+        this.deck = []
         for (let i=0; i<52; i++) {
             this.deck.push(i)
         }
