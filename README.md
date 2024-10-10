@@ -1,4 +1,4 @@
-# Single Player Poker (5 card draw)
+# Single Player Poker (5 Card Draw)
 
 This project is a simple poker like game for a single player written in Svelte and Javascript. 
 
