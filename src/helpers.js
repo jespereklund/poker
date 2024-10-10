@@ -7,6 +7,7 @@ export function calcScore(table) {
         values[card % 13] += 1
     })
 
+    /*
     //-------------------------Jacks or better----------------------------
     const betterIndexes = [0, 10, 11, 12]
     values.forEach((value, index) => {
@@ -14,16 +15,20 @@ export function calcScore(table) {
             scoreIndex = 8
         }
     })
+    */
 
-    //------------------------------2 pairs--------------------------------
+    //---------------------------1 and 2 pairs-----------------------------
     let pairs = 0
     values.forEach(value => {
         if (value === 2) {
             pairs += 1
         }
     })
+    
     if (pairs === 2) {
         scoreIndex = 7
+    } else if (pairs === 1) {
+        scoreIndex = 8
     }
 
     //---------------------------3 and 4 of a kind-------------------------

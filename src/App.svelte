@@ -16,7 +16,7 @@
   let scoreIndex = -1
   
   const scores = [500, 100, 50, 10, 7, 5, 3, 2, 1]
-  const scoreTexts = ["Royal Flush", "Straight Flush", "4 of a kind", "Full House", "Flush", "Straight", "3 of a kind", "2 pairs", "Jacks or Better"]
+  const scoreTexts = ["Royal Flush", "Straight Flush", "4 of a kind", "Full House", "Flush", "Straight", "3 of a kind", "2 pairs", "1 pair"]
   const cardWidth = 102
   const cardHeight = 115
   const cardSpaceX = 11
