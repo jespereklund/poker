@@ -1,8 +1,8 @@
 # Single Player Poker
 
-This project is a simple poker like game for a single player. 
+This project is a simple poker like game for a single player written in Svelte and Javascript. 
 
-It uses a single image sprite with all the cards and copies them and draws them on a canvas. 
+It uses a single image sprite with all the cards and it copies them and draws them on a canvas. 
 
 The game is similar to 5 Card Draw, but as a single player game.
 
