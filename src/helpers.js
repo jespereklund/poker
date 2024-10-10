@@ -94,17 +94,6 @@ export function calcScore(table) {
     return scoreIndex
 }
 
-function isSameSuit(table) {
-    const suit = Math.floor(table[0] / 13)
-    let sameSuit = true
-    table.forEach(card => {
-        if (Math.floor(card / 13) != suit) {
-            sameSuit = false
-        }
-    });
-    return sameSuit
-}
-
 export function shuffle(array) {
     let currentIndex = array.length;
     while (currentIndex != 0) {
@@ -114,4 +103,15 @@ export function shuffle(array) {
         array[randomIndex], array[currentIndex]];
     }
     return array
+}
+
+function isSameSuit(table) {
+    const suit = Math.floor(table[0] / 13)
+    let sameSuit = true
+    table.forEach(card => {
+        if (Math.floor(card / 13) != suit) {
+            sameSuit = false
+        }
+    });
+    return sameSuit
 }
