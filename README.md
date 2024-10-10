@@ -16,7 +16,7 @@ Play like this:
 
 4. Click the 'Deal' button again, and the cards that is not held will be swapped with new cards. 
 
-5. Click the 'Finish Round' button to get your score and end the round. 
+5. Click the 'Finish Round' button to collect your score and end the round. 
 
 6. Repeat from 1. 
 
