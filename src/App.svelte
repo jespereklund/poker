@@ -108,9 +108,8 @@
     drawTable()
   }
 
-  function finishGame() {
+  function finishRound() {
     scoreIndex = calcScore(table)
-    //console.log("scoreIndex", scoreIndex)
     if(scoreIndex > 0) {
       credit += bet * scores[scoreIndex] - 1
     } else {
@@ -170,7 +169,7 @@
       <button on:click={deal} disabled={gameState != "bet" && gameState != "hold"} class="btn redBorder">Deal</button>
     </div>
     <div style="width: 227px; text-align: center;">
-      <button on:click={finishGame} disabled={gameState === "bet"} class="btn redBorder">Finish Round</button>
+      <button on:click={finishRound} disabled={gameState === "bet"} class="btn redBorder">Finish Round</button>
     </div>
   </div>
   {:else}
