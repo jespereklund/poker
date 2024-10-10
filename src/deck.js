@@ -14,8 +14,7 @@ export default class Deck {
     }
 
     popCard() {
-        const card = this.deck.pop()
-        return card
+        return this.deck.pop()
     }
 
     newDeck() {
