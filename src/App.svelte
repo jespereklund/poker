@@ -15,8 +15,18 @@
   let blink = false
   let scoreIndex = -1
   
-  const scores = [500, 100, 50, 10, 7, 5, 3, 2, 1]
-  const scoreTexts = ["Royal Flush", "Straight Flush", "4 of a kind", "Full House", "Flush", "Straight", "3 of a kind", "2 pairs", "1 pair"]
+  const scores = [
+    {text: "Royal Flush", value: 500},
+    {text: "Straight Flush", value: 100},
+    {text: "4 of a kind", value: 50},
+    {text: "Full House", value: 10},
+    {text: "Flush", value: 7},
+    {text: "Straight", value: 5},
+    {text: "3 of a kind", value: 3},
+    {text: "2 pairs", value: 2},
+    {text: "1 pair", value: 1}
+  ]
+
   const cardWidth = 102
   const cardHeight = 115
   const cardSpaceX = 11
@@ -111,7 +121,7 @@
   function finishRound() {
     scoreIndex = calcScore(table)
     if(scoreIndex > 0) {
-      credit += bet * scores[scoreIndex] - 1
+      credit += bet * scores[scoreIndex].value - 1
     } else {
       credit -= 1
     }
@@ -141,8 +151,8 @@
       <p class="txt">Bet {bet}</p>
     </div>
     <table class="txt">
-      {#each scoreTexts as text, index}
-        <tr style="opacity:{(scoreIndex === index && blink) ? 0.0 : 1.0}"><td>{text}</td><td class="right">{bet * scores[index]}</td></tr>  
+      {#each scores as score, index}
+        <tr style="opacity:{(scoreIndex === index && blink) ? 0.0 : 1.0}"><td>{score.text}</td><td class="right">{bet * score.value}</td></tr>  
       {/each}
     </table>
   </div>
