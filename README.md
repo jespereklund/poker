@@ -21,12 +21,12 @@ Play like this:
 6. Repeat from 1. 
 
 Types of scores:  
-Royal Flush: the 5 highest cards in order (10, J, Q, K, A) and all in the same suit (flush)  
-Straight Flush: 5 cards in order (E.g. 6,7,8,9,10) in any suit  
+Royal Flush: the 5 highest ranking cards in order (straight) (10, J, Q, K, A) and all in the same suit (flush)  
+Straight Flush: 5 cards in order (E.g. 6, 7, 8, 9, 10) in any different suits  
 4 of a kind: 4 cards with the same rank  
 Full House: 3 of a kind and 2 of a kind (E.g. 5, 5, 5, 8, 8)  
 Flush: 5 cards in the same suit  
-Straight: 5 cards in a row, E.g. 3, 4, 5, 6, 7 but in different suits  
+Straight: 5 cards in a row, E.g. 3, 4, 5, 6, 7 in different suits  
 3 of a kind: 3 cards with the same rank  
 2 pairs: 2 pairs with the same ranks, E.g. 4, 4, 9, 9  
 1 pair: 2 cards with the same rank, E.g. 6, 6  
