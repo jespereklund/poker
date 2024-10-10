@@ -146,7 +146,7 @@
 <main>
   {#if gameState != "gameOver"}
   <div style="display: flex; flex-direction: row;">
-    <div style="padding-left:50px; width: 350px; color: white;">
+    <div style="padding-left:50px; width: 350px;">
       <p class="txt">Credit {credit}</p>
       <p class="txt">Bet {bet}</p>
     </div>
@@ -169,16 +169,16 @@
   </div>
   <br><br>
   <div style="width: 1150px; padding-left: 2px; display: flex; flex-direction: row;">
-    <div style="width: 227px; text-align: center;">
+    <div class="actionBtnDiv">
       <button on:click={resetBet} disabled={gameState != "bet"} class="btn redBorder">Reset Bet</button>
     </div>
-    <div style="width: 227px; text-align: center;">
+    <div class="actionBtnDiv">
       <button on:click={bet1} disabled={gameState != "bet"} class="btn redBorder">Bet 1</button>
     </div>
-    <div style="width: 227px; text-align: center;">
+    <div class="actionBtnDiv">
       <button on:click={deal} disabled={gameState != "bet" && gameState != "hold"} class="btn redBorder">Deal</button>
     </div>
-    <div style="width: 227px; text-align: center;">
+    <div class="actionBtnDiv">
       <button on:click={finishRound} disabled={gameState === "bet"} class="btn redBorder">Finish Round</button>
     </div>
   </div>
@@ -189,6 +189,11 @@
 <style>
   table {
     width: 500px;
+  }
+
+  .actionBtnDiv {
+    width: 227px; 
+    text-align: center;
   }
   .txt {
     color: yellow;
