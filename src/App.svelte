@@ -39,7 +39,7 @@
   function dealAfterHold() {
     for (let i=0; i<5; i++) {
       if (holds[i] != true) {
-        table[i] = deck.popCard(true) 
+        table[i] = deck.popCard() 
       }
     }
   }
@@ -110,7 +110,7 @@
 
   function finishGame() {
     scoreIndex = calcScore(table)
-    console.log("scoreIndex", scoreIndex)
+    //console.log("scoreIndex", scoreIndex)
     if(scoreIndex > 0) {
       credit += bet * scores[scoreIndex] - 1
     } else {
@@ -119,6 +119,7 @@
     if (credit < 1) {
       gameState = "gameOver"
     } else {
+      deck.newRound()
       bet = 1
       gameState = "bet"
       table = []

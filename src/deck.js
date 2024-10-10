@@ -5,12 +5,13 @@ export default class Deck {
         this.newDeck()
     }
 
-    popCard(afterHold = false) {
-        console.log("popCard deck length=", this.deck.length, afterHold)
-        if (this.deck.length < 9 && afterHold === false ) {
-            this.deck = []
+    newRound() {
+        if (this.deck.length < 10) {
             this.newDeck()
         }
+    }
+
+    popCard() {
         const card = this.deck.pop()
         return card
     }
@@ -21,7 +22,6 @@ export default class Deck {
             this.deck.push(i)
         }
         this.shuffleDeck()      
-        console.log("new deck", this.deck.length)
     }
 
     shuffleDeck() {
