@@ -33,4 +33,4 @@ Straight: 5 cards in a row, E.g. 3, 4, 5, 6, 7 in different suits
 
 You can try it here:  
 
-[https://flettedehvaler.dk/poker/]([https://duckduckgo.com](https://flettedehvaler.dk/poker/))
+[https://flettedehvaler.dk/poker/](https://flettedehvaler.dk/poker/)
