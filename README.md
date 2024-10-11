@@ -30,3 +30,7 @@ Straight: 5 cards in a row, E.g. 3, 4, 5, 6, 7 in different suits
 3 of a kind: 3 cards with the same rank  
 2 pairs: 2 pairs with the same ranks, E.g. 4, 4, 9, 9  
 1 pair: 2 cards with the same rank, E.g. 6, 6  
+
+You can try it here:  
+
+[https://flettedehvaler.dk/poker/]([https://duckduckgo.com](https://flettedehvaler.dk/poker/))
